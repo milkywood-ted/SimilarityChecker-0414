@@ -8,6 +8,7 @@ public:
 	static const int LEN_TWICE_DIFF_SCORE = 0;
 	static const int EXISTENCE_MAXSCORE = 40;
 	static const int EXISTENCE_NONE_UPPER_SCORE = 0;
+	static const int NUM_ALPHABETS = 26;
 
 	int getSimilarityScore(const string& first, const string& second) {
 		return lengthSimilarity(first, second) + existenceSimilarity(first, second);
@@ -61,11 +62,11 @@ private:
 			shorterLength = firstLength;
 		}
 
-		return 60 - (60 * lengthDiff) / shorterLength;
+		return LEN_MAXSCORE - (LEN_MAXSCORE * lengthDiff) / shorterLength;
 	}
 
 	bool existSameLetters() const {
-		for (int i = 0; i < 26; ++i) {
+		for (int i = 0; i < NUM_ALPHABETS; ++i) {
 			if (alphabetsFirst[i] ^ alphabetsSecond[i])
 				return false;
 		}
@@ -76,11 +77,11 @@ private:
 	int getPartialScoreExistence() const {
 		int sameCnt = 0, totalCnt = 0;
 
-		for (int i = 0; i < 26; ++i) {
+		for (int i = 0; i < NUM_ALPHABETS; ++i) {
 			if (alphabetsFirst[i] && alphabetsSecond[i]) sameCnt++;
 			if (alphabetsFirst[i] || alphabetsSecond[i]) totalCnt++;
 		}
 
-		return sameCnt * 40 / totalCnt;
+		return sameCnt * EXISTENCE_MAXSCORE / totalCnt;
 	}
 };
