@@ -10,19 +10,21 @@ public:
 		if (first.length() == second.length())
 			return 60;
 
-		int partialScore = 0;
+		return getPartialScore(first, second);
+	}
 
-		int lengthDiff = 0, shorterLength = 0;
-		if (first.length() >= second.length()) {
-			lengthDiff = first.length() - second.length();
-			shorterLength = second.length();
-		}
-		else {
-			lengthDiff = second.length() - first.length();
-			shorterLength = first.length();
+	int getPartialScore(std::string& first, std::string& second)
+	{
+		int firstLength = first.length(), secondLength = second.length();
+		int lengthDiff = firstLength - secondLength;
+		int shorterLength = secondLength;
+
+		if (firstLength < secondLength) {
+			lengthDiff = secondLength - firstLength;
+			shorterLength = firstLength;
 		}
 
-		partialScore = 60 - (60 *lengthDiff)/shorterLength;
+		int partialScore = 60 - (60 * lengthDiff) / shorterLength;
 
 		return partialScore;
 	}
