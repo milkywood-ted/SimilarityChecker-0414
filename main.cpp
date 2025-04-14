@@ -11,14 +11,6 @@ TEST(SimilarityLengthTS, TC1) {
 	EXPECT_EQ(expected, app.lengthSimilarity(first, second));
 }
 
-TEST(SimilarityLengthTS, TC1_1) {
-	SimilarityChecker app;
-	string first = "ASd", second = "DSa";
-
-	int expected = 0;
-	EXPECT_EQ(expected, app.lengthSimilarity(first, second));
-}
-
 TEST(SimilarityLengthTS, TC2) {
 	SimilarityChecker app;
 	string first = "A", second = "BBB";
@@ -40,6 +32,30 @@ TEST(SimilarityExistenceTS, TC1) {
 	string first = "ASD", second = "DSA";
 
 	int expected = 40;
+	EXPECT_EQ(expected, app.existenceSimilarity(first, second));
+}
+
+TEST(SimilarityExistenceTS, TC2) {
+	SimilarityChecker app;
+	string first = "ASd", second = "DSa";
+
+	int expected = 0;
+	EXPECT_EQ(expected, app.existenceSimilarity(first, second));
+}
+
+TEST(SimilarityExistenceTS, TC3) {
+	SimilarityChecker app;
+	string first = "AAABB", second = "BA";
+
+	int expected = 40;
+	EXPECT_EQ(expected, app.existenceSimilarity(first, second));
+}
+
+TEST(SimilarityExistenceTS, TC4) {
+	SimilarityChecker app;
+	string first = "AA", second = "AAE";
+
+	int expected = 20;
 	EXPECT_EQ(expected, app.existenceSimilarity(first, second));
 }
 
