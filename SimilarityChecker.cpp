@@ -9,6 +9,10 @@ public:
 	static const int EXISTENCE_MAXSCORE = 40;
 	static const int EXISTENCE_NONE_UPPER_SCORE = 0;
 
+	int getSimilarityScore(const string& first, const string& second) {
+		return lengthSimilarity(first, second) + existenceSimilarity(first, second);
+	}
+
 	int lengthSimilarity(const string& first, const string& second) {
 		if (first.length() >= second.length() * 2 || second.length() >= first.length() * 2)
 			return LEN_TWICE_DIFF_SCORE;

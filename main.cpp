@@ -4,16 +4,6 @@
 using std::string;
 using namespace ::testing;
 
-class StringSimilarityFixture : public Test {
-public:
-	StringSimilarityFixture(const string first, const string second) : first_{ first }, second_{ second } {}
-
-	int testSimilarityLength() {
-
-	}
-private:
-	string first_, second_;
-};
 TEST(SimilarityLengthTS, TC_Max1) {
 	SimilarityChecker app;
 	string first = "ASD", second = "DSA";
