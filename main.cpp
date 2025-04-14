@@ -11,6 +11,14 @@ TEST(SimilarityLengthTS, TC1) {
 	EXPECT_EQ(expected, app.lengthSimilarity(first, second));
 }
 
+TEST(SimilarityLengthTS, TC2) {
+	SimilarityChecker app;
+	string first = "A", second = "BBB";
+
+	int expected = 0;
+	EXPECT_EQ(expected, app.lengthSimilarity(first, second));
+}
+
 int main(void) {
 	::testing::InitGoogleMock();
 	return RUN_ALL_TESTS();
