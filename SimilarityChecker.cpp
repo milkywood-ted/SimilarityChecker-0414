@@ -4,22 +4,27 @@ using std::string;
 
 class SimilarityChecker {
 public:
+	static const int LEN_MAXSCORE = 60;
+	static const int LEN_TWICE_DIFF_SCORE = 0;
+	static const int EXISTENCE_MAXSCORE = 40;
+	static const int EXISTENCE_NONE_UPPER_SCORE = 0;
+
 	int lengthSimilarity(const string& first, const string& second) {
 		if (first.length() >= second.length() * 2 || second.length() >= first.length() * 2)
-			return 0;
+			return LEN_TWICE_DIFF_SCORE;
 		if (first.length() == second.length())
-			return 60;
+			return LEN_MAXSCORE;
 
 		return getPartialScoreLength(first, second);
 	}
 
 	int existenceSimilarity(const string& first, const string& second) {
 		if (false == isUpper(first) || false == isUpper(second))
-			return 0;
+			return EXISTENCE_NONE_UPPER_SCORE;
 
 		updateAlphabets(first, second);
 		if (existSameLetters())
-			return 40;
+			return EXISTENCE_MAXSCORE;
 
 		return getPartialScoreExistence();
 	}

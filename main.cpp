@@ -2,24 +2,35 @@
 #include "SimilarityChecker.cpp"
 
 using std::string;
+using namespace ::testing;
 
-TEST(SimilarityLengthTS, TC1) {
+class StringSimilarityFixture : public Test {
+public:
+	StringSimilarityFixture(const string first, const string second) : first_{ first }, second_{ second } {}
+
+	int testSimilarityLength() {
+
+	}
+private:
+	string first_, second_;
+};
+TEST(SimilarityLengthTS, TC_Max1) {
 	SimilarityChecker app;
 	string first = "ASD", second = "DSA";
 
-	int expected = 60;
+	int expected = ::SimilarityChecker::LEN_MAXSCORE;
 	EXPECT_EQ(expected, app.lengthSimilarity(first, second));
 }
 
-TEST(SimilarityLengthTS, TC2) {
+TEST(SimilarityLengthTS, TC_Zero1) {
 	SimilarityChecker app;
 	string first = "A", second = "BBB";
 
-	int expected = 0;
+	int expected = ::SimilarityChecker::LEN_TWICE_DIFF_SCORE;
 	EXPECT_EQ(expected, app.lengthSimilarity(first, second));
 }
 
-TEST(SimilarityLengthTS, TC3) {
+TEST(SimilarityLengthTS, TC_Partial1) {
 	SimilarityChecker app;
 	string first = "AAABB", second = "BAA";
 
@@ -27,23 +38,15 @@ TEST(SimilarityLengthTS, TC3) {
 	EXPECT_EQ(expected, app.lengthSimilarity(first, second));
 }
 
-TEST(SimilarityExistenceTS, TC1) {
+TEST(SimilarityExistenceTS, TC_Max1) {
 	SimilarityChecker app;
 	string first = "ASD", second = "DSA";
 
-	int expected = 40;
+	int expected = ::SimilarityChecker::EXISTENCE_MAXSCORE;
 	EXPECT_EQ(expected, app.existenceSimilarity(first, second));
 }
 
-TEST(SimilarityExistenceTS, TC2) {
-	SimilarityChecker app;
-	string first = "ASd", second = "DSa";
-
-	int expected = 0;
-	EXPECT_EQ(expected, app.existenceSimilarity(first, second));
-}
-
-TEST(SimilarityExistenceTS, TC3) {
+TEST(SimilarityExistenceTS, TC_Max2) {
 	SimilarityChecker app;
 	string first = "AAABB", second = "BA";
 
@@ -51,7 +54,15 @@ TEST(SimilarityExistenceTS, TC3) {
 	EXPECT_EQ(expected, app.existenceSimilarity(first, second));
 }
 
-TEST(SimilarityExistenceTS, TC4) {
+TEST(SimilarityExistenceTS, TC_Zero1) {
+	SimilarityChecker app;
+	string first = "ASd", second = "DSa";
+
+	int expected = ::SimilarityChecker::EXISTENCE_NONE_UPPER_SCORE;
+	EXPECT_EQ(expected, app.existenceSimilarity(first, second));
+}
+
+TEST(SimilarityExistenceTS, TC_Partial1) {
 	SimilarityChecker app;
 	string first = "AA", second = "AAE";
 
@@ -60,6 +71,6 @@ TEST(SimilarityExistenceTS, TC4) {
 }
 
 int main(void) {
-	::testing::InitGoogleMock();
+	InitGoogleMock();
 	return RUN_ALL_TESTS();
 }
