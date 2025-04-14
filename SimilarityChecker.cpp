@@ -36,4 +36,8 @@ public:
 
 		return partialScore;
 	}
+
+	int existenceSimilarity(string& first, string& second) {
+		return 40;
+	}
 };

@@ -35,6 +35,14 @@ TEST(SimilarityLengthTS, TC3) {
 	EXPECT_EQ(expected, app.lengthSimilarity(first, second));
 }
 
+TEST(SimilarityExistenceTS, TC1) {
+	SimilarityChecker app;
+	string first = "ASD", second = "DSA";
+
+	int expected = 40;
+	EXPECT_EQ(expected, app.existenceSimilarity(first, second));
+}
+
 int main(void) {
 	::testing::InitGoogleMock();
 	return RUN_ALL_TESTS();
